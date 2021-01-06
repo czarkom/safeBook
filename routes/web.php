@@ -13,6 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
+//    ->middleware('auth');
+
+Route::get('/login', function() {
+    return view('login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+$ignorePrefixes = [
+    'api',
+    'js',
+    'css',
+    'images',
+    'fonts',
+];
+$regex = '^(?!' . implode('|', array_map(function($prefix) { return $prefix . '\/'; }, $ignorePrefixes)) . ').*';
+//Route::view('/{anything}', 'dashboard')->where('anything', $regex);
+
+Route::any('{query}', function () {
+    return redirect('/dashboard');
+})->where('query', $regex);
