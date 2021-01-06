@@ -26,6 +26,10 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('/resetPassword', function () {
+    return view('passwordReset');
+});
+
 $ignorePrefixes = [
     'api',
     'js',

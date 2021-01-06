@@ -21,3 +21,7 @@ use Illuminate\Support\Facades\Route;
 //});
 Route::post('login', LoginController::class);
 Route::post('register', RegistrationController::class);
+Route::group(['middleware' => 'auth:api'], function () {
+//    Route::post('logout', LogoutController::class);
+//    Route::get('sendMessage', CurrentUserController::class);
+});
