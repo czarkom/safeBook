@@ -4,7 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\SendMessageController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,9 +48,10 @@ Route::post('register', RegistrationController::class);
 Route::group(['middleware' => 'auth'], function () {
     Route::post('logout', LogoutController::class);
     Route::get('dashboard', DashboardController::class);
-    Route::post('sendMessage', SendMessageController::class);
+    Route::post('sendMessage', [MessageController::class, 'sendMessage']);
+
+    Route::post('decryptMessage', [MessageController::class, 'decryptMessage']);
 //    Route::get('decryptMessage', SendMessageController::class);
-//    Route::resource('dashboard', DashboardController::class)->only(['index', 'store']);
 });
 
 

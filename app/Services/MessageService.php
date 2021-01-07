@@ -32,10 +32,6 @@ class MessageService
         return 'dupa';
     }
 
-    public function getLastLogins(User $user){
-        return 'dupa';
-    }
-
     public function saveEncryptedMessage(MessageRequest $request){
         $user = $request->user();
 

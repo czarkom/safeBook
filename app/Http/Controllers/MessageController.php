@@ -3,29 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
-use App\Models\User;
 use App\Services\MessageService;
-use App\Services\UserService;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class MessageController extends Controller
 {
-    public function __invoke(Request $request, MessageService $messageService, UserService $userService)
-    {
+    public function sendMessage(MessageRequest $request, MessageService $messageService){
+        if( $request->get('is_encrypted')){
+            $messageService->saveEncryptedMessage($request);
+        } else {
+            $messageService->saveMessage($request);
+        };
+        return redirect('dashboard');
+    }
+
+    public function decryptMessage(Request $request, MessageService $messageService){
         $currentUser = $request->user();
 
         $publicMessages = $messageService->getPublicMessages();
         $sent = $messageService->getUserSentMessages($currentUser);
         $shared = $messageService->getSharedMessages($currentUser);
-        $lastLogins = $userService->getLastLogins($currentUser);
-        $users = User::query()->get();
+        $lastLogins = $messageService->getLastLogins($currentUser);
 
         return view('dashboard', [
             'publicMessages' => $publicMessages,
             'sent' => $sent,
             'shared' => $shared,
             'lastLogins' => $lastLogins,
-            'users' => $users,
         ]);
     }
 }

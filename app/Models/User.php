@@ -58,6 +58,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
+    public function lastLogins(){
+        return $this->hasMany(LastLogin::class);
+    }
+
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt(sha1($password));
     }

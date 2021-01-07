@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="flex justify-center">
-    <div class=" w-1/3 mt-16">
+    <div class="w-1/4 mt-16">
         <div class="rounded-xl border-8">
             <img src="/images/safeBook_logo.jpg">
         </div>
