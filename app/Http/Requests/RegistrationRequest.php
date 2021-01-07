@@ -13,7 +13,19 @@ class RegistrationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    public function messages()
+    {
+        return [
+            'first_name.required'    => 'Podaj imię',
+            'last_name.required' => 'Podaj nazwisko',
+            'email.required'    => 'Podaj adres e-mail',
+            'email.unique' => 'Email jest już zajęty',
+            'password.required' => 'Podaj hasło',
+            'password_repeat.required' => 'Podaj hasło ponownie',
+        ];
     }
 
     /**
@@ -24,7 +36,11 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+            'password_repeat' => 'required',
         ];
     }
 }

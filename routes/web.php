@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SendMessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,10 +17,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::group(['middleware' => ['web']], function () {
+//    Route::get('/dashboard', function () {
+//        return view('dashboard');
+//    })->middleware('auth');
+//});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+//Route::get('/dashboard', function () {
+//    Route::get('dashboard', \App\Http\Controllers\DashboardController::class);
+//})->middleware('auth');
+
 //    ->middleware('auth');
 
 Route::get('/login', function() {
@@ -29,6 +40,18 @@ Route::get('/register', function () {
 Route::get('/resetPassword', function () {
     return view('passwordReset');
 });
+
+Route::post('login', LoginController::class);
+
+Route::post('register', RegistrationController::class);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('logout', LogoutController::class);
+    Route::get('dashboard', DashboardController::class);
+    Route::post('sendMessage', SendMessageController::class);
+//    Route::resource('dashboard', DashboardController::class)->only(['index', 'store']);
+});
+
 
 $ignorePrefixes = [
     'api',

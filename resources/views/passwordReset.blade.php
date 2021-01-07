@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+@extends('app')
 
-    <title>SafeBook</title>
-</head>
-<body class="antialiased bg-gray-100">
+@section('content')
 <div class="flex justify-center">
     <div class=" w-1/3 mt-16">
         <div class="text-center font-bold text-2xl mt-4">
             <span>Safebook - resetowanie hasła</span>
         </div>
-        <form method="POST" action="/api/resetPassword">
+        <form method="POST" action="/resetPassword">
             @csrf
             <div class="mt-4">
                 <div class="rounded-t border bg-gray-200 px-4 py-3">
@@ -52,5 +45,4 @@
         </form>
     </div>
 </div>
-</body>
-</html>
+@endsection

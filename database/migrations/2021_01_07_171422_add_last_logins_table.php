@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class AddLastLoginsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('last_logins', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->string('content')->nullable();
-            $table->boolean('is_public')->default(true);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('ip_address');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('last_logins');
     }
 }

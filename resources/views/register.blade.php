@@ -1,46 +1,72 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+@extends('app')
 
-    <title>SafeBook</title>
-</head>
-<body class="antialiased bg-gray-100">
+@section('content')
 <div class="flex justify-center">
     <div class=" w-1/3 mt-16">
         <div class="text-center font-bold text-2xl mt-4">
             <span>Safebook - rejestracja</span>
         </div>
-        <form method="POST" action="/api/register">
+        <form method="POST" action="/register">
             @csrf
             <div class="mt-4">
                 <div class="rounded-t border bg-gray-200 px-4 py-3">
                     Uzupełnij wymagane dane
                 </div>
                 <div class="border-l border-r bg-white p-4">
-                    <label class="label" for="email">Adres e-mail</label>
+                    @if ($errors->any())
+                        <div class="border-2 m-2 p-2 rounded-xl border-red-800 bg-red-500">
+                            <span>Popraw błędy w formularzu</span>
+                        </div>
+                    @endif
+                    <label class="label" for="name">Imię</label>
+                    <input id="name"
+                           class="input"
+                           type="text"
+                           placeholder="Janusz"
+                           name="first_name"
+                    >
+                    @error('first_name')
+                        <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
+                    @enderror
+                    <label class="label mt-4" for="surname">Nazwisko</label>
+                    <input id="surname"
+                           class="input"
+                           type="text"
+                           placeholder="Kowalski"
+                           name="last_name">
+                    @error('last_name')
+                        <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
+                    @enderror
+                    <label class="label mt-4" for="email">Adres e-mail</label>
                     <input id="email"
                            class="input"
                            type="text"
                            placeholder="john.doe@example.com"
                            name="email"
                     >
-                    <label class="label mt-2" for="password">Hasło</label>
+                    @error('email')
+                        <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
+                    @enderror
+                    <label class="label mt-4" for="password">Hasło</label>
                     <input id="password"
                            class="input"
                            type="password"
                            placeholder="********"
                            name="password"
                     >
-                    <label class="label mt-2" for="password_repeat">Powtórz hasło</label>
+                    @error('password')
+                        <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
+                    @enderror
+                    <label class="label mt-4" for="password_repeat">Powtórz hasło</label>
                     <input id="password_repeat"
                            class="input"
                            type="password"
                            placeholder="********"
                            name="password_repeat"
                     >
+                    @error('password_repeat')
+                        <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
                     <button type="submit" class="button button-primary">Zarejestruj</button>
@@ -49,6 +75,5 @@
         </form>
     </div>
 </div>
-</body>
-</html>
+@endsection
 

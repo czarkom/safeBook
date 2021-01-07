@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrationRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(Request $request)
+    public function __invoke(RegistrationRequest $request)
     {
-        //
+        /** @var User $user */
+        $user = User::query()->create($request->only([
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+        ]));
+
+        return redirect('/login')->with('status', 'Zarejestrowano pomyślnie! Zaloguj się');
     }
 }

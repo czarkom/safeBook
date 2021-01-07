@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'first_name'          => 'Maciej',
             'last_name'           => 'Czarkowski',
             'email'               => 'maciej@czarkowski.pl',
-            'password'            => bcrypt('password'),
+            'password'            => 'password',
             'password_changed_at' => now(),
         ]);
 
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             'first_name'          => 'Tomasz',
             'last_name'           => 'Duszyn',
             'email'               => 'tomasz@duszyn.pl',
-            'password'            => bcrypt('password'),
+            'password'            => 'password',
             'password_changed_at' => now(),
         ]);
 
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
             'first_name'          => 'Bartosz',
             'last_name'           => 'Chaber',
             'email'               => 'bchaber@od.pl',
-            'password'            => bcrypt('password'),
+            'password'            => 'password',
             'password_changed_at' => now(),
         ]);
 
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
             'first_name'          => 'Kamil',
             'last_name'           => 'Klient',
             'email'               => 'klient@klient.pl',
-            'password'            => bcrypt('password'),
+            'password'            => 'password',
             'password_changed_at' => now(),
         ]);
 
@@ -53,7 +53,7 @@ class UsersTableSeeder extends Seeder
             'first_name'          => 'Grzegorz',
             'last_name'           => 'Polak',
             'email'               => 'polska@stronk.pl',
-            'password'            => bcrypt('password'),
+            'password'            => 'password',
             'password_changed_at' => now(),
         ]);
     }

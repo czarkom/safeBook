@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateSharedMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('shared_messages', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->string('content')->nullable();
-            $table->boolean('is_public')->default(true);
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('message_id')->index();
             $table->timestamps();
+
+            $table->unique(['user_id', 'message_id']);
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -29,6 +31,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('shared_messages');
     }
 }
