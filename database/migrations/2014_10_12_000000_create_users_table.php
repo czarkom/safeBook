@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->boolean('account_blocked')->default(false);
+            $table->integer('failed_login_attempts_counter')->default(0);
             $table->dateTime('password_changed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

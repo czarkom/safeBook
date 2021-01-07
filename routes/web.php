@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('logout', LogoutController::class);
     Route::get('dashboard', DashboardController::class);
     Route::post('sendMessage', SendMessageController::class);
+//    Route::get('decryptMessage', SendMessageController::class);
 //    Route::resource('dashboard', DashboardController::class)->only(['index', 'store']);
 });
 

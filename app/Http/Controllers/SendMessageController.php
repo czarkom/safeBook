@@ -10,9 +10,7 @@ class SendMessageController extends Controller
 {
     public function __invoke(MessageRequest $request, MessageService $messageService){
         if( $request->get('is_encrypted')){
-            //TODO Tutaj dodawanie zaszyfrowane
             $messageService->saveEncryptedMessage($request);
-            dump("tiritiri");
         } else {
             $messageService->saveMessage($request);
         };

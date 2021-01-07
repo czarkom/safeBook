@@ -111,9 +111,25 @@
                                 <div class="bg-gray-200 w-full p-2 font-bold">
                                     {{$message->created_at}}
                                 </div>
-                                <div class="p-2">
+                                <div class="p-2 break-words">
                                     {{$message->content}}
                                 </div>
+                                @if($message['is_encrypted'])
+                                    <div class="bg-gray-200 w-full p-2">
+                                        <form action="/decryptMessage" method="POST">
+                                            <span>Wiadomość zaszyfrowana, wpisz hasło:</span>
+                                            <div class="flex items-center mt-2">
+                                                <input id="content"
+                                                       class="input h-10 mr-2 w-1/2"
+                                                       type="password"
+                                                       placeholder="*******"
+                                                       name="message_password"
+                                                >
+                                                <button type="submit" class="button button-primary">Odszyfruj mnie</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -130,9 +146,25 @@
                         <div class="bg-gray-200 w-full p-2 font-bold">
                             {{$message->user->first_name}} {{$message->user->last_name}} ({{$message->user->email}})
                         </div>
-                        <div class="p-2">
+                        <div class="p-2 break-words">
                             {{$message->content}}
                         </div>
+                        @if($message['is_encrypted'])
+                            <div class="bg-gray-200 w-full p-2">
+                                <form action="/decryptMessage" method="POST">
+                                    <span>Wiadomość zaszyfrowana, wpisz hasło:</span>
+                                    <div class="flex items-center mt-2">
+                                        <input id="content"
+                                               class="input h-10 mr-2 w-1/2"
+                                               type="password"
+                                               placeholder="*******"
+                                               name="message_password"
+                                        >
+                                        <button type="submit" class="button button-primary">Odszyfruj mnie</button>
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>

@@ -10,6 +10,8 @@ use App\Models\User;
 
 class MessageService
 {
+    protected $cipher = 'aes-256-cbc-hmac-sha256';
+
     public function getPublicMessages(){
         return Message::with('user')->where('is_public', true)->get();
     }
@@ -19,8 +21,6 @@ class MessageService
     }
 
     public function saveMessage(MessageRequest $message){
-        dump($message['author_id']);
-
         $user = $message->user();
 
         $user->messages()->create($message->only([
@@ -36,7 +36,19 @@ class MessageService
         return 'dupa';
     }
 
-    public function saveEncryptedMessage(Message $message){
+    public function saveEncryptedMessage(MessageRequest $request){
+        $user = $request->user();
 
+        $message = $request->only([
+            'content',
+            'file',
+            'password',
+            'is_encrypted'
+        ]);
+
+        $message['content'] = openssl_encrypt($message['content'], $this->cipher, $message['password'], 0, "safetyisreallyok");
+        $message['password'] = bcrypt($message['password']);
+        $message['is_encrypted'] = 1;
+        $user->messages()->create($message);
     }
 }

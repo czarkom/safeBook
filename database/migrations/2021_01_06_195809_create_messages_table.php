@@ -17,6 +17,9 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('content')->nullable();
+            $table->boolean('is_encrypted')->default(false);
+            $table->string('password')->nullable();
+            $table->string('file')->nullable();
             $table->boolean('is_public')->default(true);
             $table->timestamps();
         });

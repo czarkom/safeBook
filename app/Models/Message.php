@@ -12,6 +12,9 @@ class Message extends Model
 
     protected $fillable = [
         'content',
+        'file',
+        'is_encrypted',
+        'password'
         ];
 
     public function user()
