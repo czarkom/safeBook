@@ -110,7 +110,7 @@
                     <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                         Moje notatki
                     </div>
-                    <div class="border-l border-r bg-white p-4">
+                    <div class="border-l border-r bg-white px-4 py-2">
                         @if(count($sent)==0)
                             <div class="font-gray-800">
                                 Brak wiadomości
@@ -152,7 +152,7 @@
             <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                 Notatki publiczne
             </div>
-            <div class="border-l border-r bg-white p-4">
+            <div class="border-l border-r bg-white px-4 py-2">
                 @if(count($publicMessages)==0)
                     <div class="font-gray-800">
                         Brak wiadomości

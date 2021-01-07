@@ -6,6 +6,7 @@ use App\Client;
 use App\Permission;
 use App\Role;
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ use Illuminate\Support\Collection;
  * @property string            password
  * @property Carbon            password_changed_at
  */
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword
 {
     use HasFactory, Notifiable;
 
