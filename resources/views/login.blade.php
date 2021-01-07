@@ -7,7 +7,7 @@
             <img src="/images/safeBook_logo.jpg">
         </div>
         <div class="text-center font-bold text-2xl mt-4">
-            <span>Safebook - your safe space!<i class="fas fa-user-shield"></i></span>
+            Safebook - your safe space!<span class="ml-2"><i class="fas fa-user-shield"></i></span>
         </div>
         <form method="POST" action="/login">
             @csrf
