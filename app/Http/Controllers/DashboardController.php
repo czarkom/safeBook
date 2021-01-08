@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $currentUser = $request->user();
 
         $publicMessages = $messageService->getPublicMessages();
-        $sent = $messageService->getUserSentMessages($currentUser);
+        $sent = $messageService->getUserSentMessages($currentUser, false, $request);
         $shared = $messageService->getSharedMessages($currentUser);
         $lastLogins = $userService->getLastLogins($currentUser);
         $users = User::query()->get();

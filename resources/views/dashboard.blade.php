@@ -93,6 +93,7 @@
                 </div>
             </div>
             <div class="flex">
+
                 <div class="p-4 w-1/2">
                     <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                         Udostępnione dla mnie
@@ -124,6 +125,11 @@
                                 <div class="p-2 break-words">
                                     {{$message->content}}
                                 </div>
+                                @if($message['decrypted'])
+                                    <div class="bg-gray-200 text-green-500 font-bold p-2">
+                                        Odszyfrowano
+                                    </div>
+                                @endif
                                 @if($message['is_encrypted'])
                                     <div class="bg-gray-200 w-full p-2">
                                         <form action="/decryptMessage" method="POST">
@@ -139,6 +145,11 @@
                                                 <input type="hidden" name="id" value="{{$message->id}}">
                                                 <button type="submit" class="button button-primary">Odszyfruj mnie</button>
                                             </div>
+                                            @if($message['wrong_password'])
+                                                <div class="text-red-500 font-bold">
+                                                    Błędne hasło!
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
                                 @endif
