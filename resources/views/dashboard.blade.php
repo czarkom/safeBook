@@ -22,79 +22,78 @@
         </div>
     </div>
     <div class="flex">
-        <div class="w-2/3">
-            <div class="flex w-full">
-                <div class="p-4 w-1/2">
-                    <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
-                        Ostatnie logowania
-                    </div>
-                    <div class="border-l border-r bg-white p-4">
-                        @foreach($lastLogins as $attempt)
-                            <div class="my-2">
-                                <strong>Adres IP: </strong>{{$attempt->ip_address}} <strong>Data: </strong>{{$attempt->created_at}}
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
-                        <div class="button button-primary">
-                            <a href="{{ url('/resetPassword') }}">Resetuj hasło</a>
-                        </div>
-                    </div>
+        <div class="w-1/3">
+            <div class="py-2 px-2">
+                <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
+                    Ostatnie logowania
                 </div>
-                <div class="p-4 w-1/2 h-full">
-                    <form action="/sendMessage" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
-                            Dodaj nową notatkę
+                <div class="border-l border-r bg-white p-4">
+                    @foreach($lastLogins as $attempt)
+                        <div class="my-2">
+                            <strong>Adres IP: </strong>{{$attempt->ip_address}} <strong>Data: </strong>{{$attempt->created_at}}
                         </div>
-                        <div class="border-l border-r bg-white px-4 py-2">
-                            <label class="label" for="content">Treść</label>
-                            <input id="content"
-                                   class="input h-10"
-                                   type="text"
-                                   placeholder="Lorem ipsum gipsum"
-                                   name="content"
-                            >
-                            <div class="my-2 border-2 rounded p-2 bg-gray-100">
-                                <div class="mb-2">
-                                    Wybierz użytkowników
-                                </div>
-                                <select class="w-full rounded-lg" multiple name="user[]">
-                                    @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->email}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-2 flex label">
-                                <span>Dodaj plik</span>
-                                <div class="ml-2">
-                                    <i class="fas fa-folder-plus"></i> :
-                                </div>
-                            </div>
-                            <input type="file" class="label" name="file">
-                            <div>
-                                <div class="flex mt-4">
-                                    <label class="label" for="is_encrypted">Wiadomość szyfrowana</label>
-                                    <input type="checkbox" class="mx-2" id="is_encrypted" name="is_encrypted">
-                                </div>
-                                <label class="label mt-2" for="password">Wprowadź hasło jeśli wiadomość ma być zabezpieczona</label>
-                                <input id="password"
-                                       class="input"
-                                       type="password"
-                                       placeholder="********"
-                                       name="password"
-                                >
-                            </div>
-                        </div>
-                        <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
-                            <button type="submit" class="button button-primary">Wyślij</button>
-                        </div>
-                    </form>
+                    @endforeach
+                </div>
+                <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
+                    <div class="button button-primary">
+                        <a href="{{ url('/resetPassword') }}">Resetuj hasło</a>
+                    </div>
                 </div>
             </div>
-            <div class="flex">
-
-                <div class="p-4 w-1/2">
+            <div class="py-2 px-2">
+                <form action="/sendMessage" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
+                        Dodaj nową notatkę
+                    </div>
+                    <div class="border-l border-r bg-white px-4 py-2">
+                        <label class="label" for="content">Treść</label>
+                        <input id="content"
+                               class="input h-10"
+                               type="text"
+                               placeholder="Lorem ipsum gipsum"
+                               name="content"
+                        >
+                        <div class="my-2 border-2 rounded p-2 bg-gray-100">
+                            <div class="mb-2">
+                                Wybierz użytkowników
+                            </div>
+                            <select class="w-full rounded-lg" multiple name="user[]">
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->email}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-2 flex label">
+                            <span>Dodaj plik</span>
+                            <div class="ml-2">
+                                <i class="fas fa-folder-plus"></i> :
+                            </div>
+                        </div>
+                        <input type="file" class="label" name="file">
+                        <div>
+                            <div class="flex mt-4">
+                                <label class="label" for="is_encrypted">Wiadomość szyfrowana</label>
+                                <input type="checkbox" class="mx-2" id="is_encrypted" name="is_encrypted">
+                            </div>
+                            <label class="label mt-2" for="password">Wprowadź hasło jeśli wiadomość ma być zabezpieczona</label>
+                            <input id="password"
+                                   class="input"
+                                   type="password"
+                                   placeholder="********"
+                                   name="password"
+                            >
+                        </div>
+                    </div>
+                    <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
+                        <button type="submit" class="button button-primary">Wyślij</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="w-1/3">
+            <div>
+                <div class="py-2 px-2">
                     <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                         Udostępnione dla mnie
                     </div>
@@ -107,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-4 w-1/2">
+                <div class="py-2 px-2">
                     <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                         Moje notatki
                     </div>
@@ -118,7 +117,7 @@
                             </div>
                         @endif
                         @foreach ($sent as $message)
-                            <div class="m-4 border-2 rounded-lg bg-gray-100">
+                            <div class="my-2 border-2 rounded-lg bg-gray-100">
                                 <div class="bg-gray-200 w-full p-2 font-bold">
                                     {{$message->created_at}}
                                 </div>
@@ -159,7 +158,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/3 m-4">
+        <div class="w-1/3 py-2 px-2">
             <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                 Notatki publiczne
             </div>
@@ -170,7 +169,7 @@
                     </div>
                 @endif
                 @foreach ($publicMessages as $message)
-                    <div class="m-4 border-2 rounded-lg bg-gray-100">
+                    <div class="my-2 border-2 rounded-lg bg-gray-100">
                         <div class="bg-gray-200 w-full p-2 font-bold">
                             {{$message->user->first_name}} {{$message->user->last_name}} ({{$message->user->email}})
                         </div>
