@@ -113,7 +113,7 @@
                     <div class="border-l border-r bg-white px-4 py-2">
                         @if(count($sent)==0)
                             <div class="font-gray-800">
-                                Brak wiadomości
+                                Brak notatek
                             </div>
                         @endif
                         @foreach ($sent as $message)
