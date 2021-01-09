@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class MessageService
 {
@@ -45,22 +46,22 @@ class MessageService
     }
 
     public function saveMessage(MessageRequest $message){
-
         $user = $message->user();
         $message['author_id'] = $user->id;
+        if ($message['is_public']){
+            $message['is_public'] = 1;
+        }
+        if($message['file']){
+            $file = Storage::disk('local')->put('files_uploaded', $message['file']);
+            $message['file'] = $file;
+        }
 
         $newMessage = $user->messages()->create($message->only([
             'content',
             'author_id',
+            'file',
+            'is_public'
         ]));
-
-//        foreach ($message['user'] as $sharedUserId){
-//            $user = User::find($sharedUserId);
-//            $user->messages()->create($message->only([
-//               'content',
-//               'author_id',
-//            ]));
-//        }
         $newMessage->users()->sync($message['user']);
     }
 
@@ -71,12 +72,14 @@ class MessageService
     public function saveEncryptedMessage(MessageRequest $request){
         $user = $request->user();
 
+
         $message = $request->only([
             'content',
             'file',
             'password',
             'is_encrypted'
         ]);
+        $message['author_id'] = $user->id;
 
         $message['content'] = openssl_encrypt($message['content'], $this->cipher, $message['password'], 0, "safetyisreallyok");
         $message['password'] = bcrypt($message['password']);

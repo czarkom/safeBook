@@ -151,6 +151,11 @@
                                 <div class="p-2 break-words">
                                     {{$message->content}}
                                 </div>
+                                @if($message['file'])
+                                    <div class="px-2 pb-2">
+                                        <strong>Plik: </strong><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                    </div>
+                                @endif
                                 @if($message['decrypted'])
                                     <div class="bg-gray-200 text-green-500 font-bold p-2">
                                         Odszyfrowano
@@ -203,6 +208,11 @@
                         <div class="p-2 break-words">
                             {{$message->content}}
                         </div>
+                        @if($message['file'])
+                            <div class="px-2 pb-2">
+                                <strong>Plik: </strong><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -220,6 +230,7 @@
         } else {
             x.style.display = "none";
             y.style.display = "block";
+            document.getElementById("user_select").value = null;
         }
     }
     function showUserSelect(){
@@ -229,7 +240,7 @@
             x.style.display = 'block';
         } else {
             x.style.display = "none";
-            y.value = "";
+            y.value = null;
         }
     }
 </script>

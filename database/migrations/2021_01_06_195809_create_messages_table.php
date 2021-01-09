@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->boolean('is_encrypted')->default(false);
             $table->string('password')->nullable();
             $table->string('file')->nullable();
-            $table->boolean('is_public')->default(true);
+            $table->boolean('is_public')->default(false);
             $table->timestamps();
         });
     }

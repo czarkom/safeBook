@@ -15,7 +15,8 @@ class Message extends Model
         'content',
         'file',
         'is_encrypted',
-        'password'
+        'password',
+        'is_public'
         ];
 
     public function author()
