@@ -23,8 +23,11 @@ class RegistrationRequest extends FormRequest
             'last_name.required' => 'Podaj nazwisko',
             'email.required'    => 'Podaj adres e-mail',
             'email.unique' => 'Email jest już zajęty',
+            'email.email' => 'Nieprawidłowy format adresu email',
             'password.required' => 'Podaj hasło',
+            'password.min' => 'Hasło musi mieć co najmniej 8 znaków',
             'password_repeat.required' => 'Podaj hasło ponownie',
+            'password_repeat.same' => 'Powtórzone hasło nieprawidłowe',
         ];
     }
 
@@ -38,9 +41,9 @@ class RegistrationRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required',
-            'password_repeat' => 'required',
+            'email' => 'required|unique:users,email|email',
+            'password' => 'required|min:8',
+            'password_repeat' => 'required|same:password',
         ];
     }
 }

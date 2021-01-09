@@ -4,6 +4,7 @@
 /public/fonts/vendor
 /storage/*.key
 /storage/framework/sessions
+/resources/sass
 /vendor
 .env
 .env.backup

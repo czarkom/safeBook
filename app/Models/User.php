@@ -22,7 +22,7 @@ use Illuminate\Support\Collection;
  * @property string            password
  * @property Carbon            password_changed_at
  */
-class User extends Authenticatable implements CanResetPassword
+class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
     use HasFactory, Notifiable;
 

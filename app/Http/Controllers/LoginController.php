@@ -13,6 +13,8 @@ class LoginController extends Controller
 {
     public function __invoke(LoginRequest $request, UserService $userService)
     {
+        sleep(2);
+
         $credentials = $request->only('email','password');
 
         $credentials['password'] = sha1($credentials['password']);

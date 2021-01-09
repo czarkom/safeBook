@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'last_name'           => 'Czarkowski',
             'email'               => 'maciej@czarkowski.pl',
             'password'            => 'password',
-            'password_changed_at' => now(),
+            'email_verified_at'   => now(),
         ]);
 
 
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
             'last_name'           => 'Duszyn',
             'email'               => 'tomasz@duszyn.pl',
             'password'            => 'password',
-            'password_changed_at' => now(),
+            'email_verified_at'   => now(),
         ]);
 
         $user = User::query()->create([
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'last_name'           => 'Chaber',
             'email'               => 'bchaber@od.pl',
             'password'            => 'password',
-            'password_changed_at' => now(),
+            'email_verified_at'   => now(),
         ]);
 
         $user = User::query()->create([
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
             'last_name'           => 'Klient',
             'email'               => 'klient@klient.pl',
             'password'            => 'password',
-            'password_changed_at' => now(),
+            'email_verified_at'   => now(),
         ]);
 
 
@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
             'last_name'           => 'Polak',
             'email'               => 'polska@stronk.pl',
             'password'            => 'password',
-            'password_changed_at' => now(),
+            'email_verified_at'   => now(),
         ]);
     }
 }
