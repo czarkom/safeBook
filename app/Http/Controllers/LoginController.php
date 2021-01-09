@@ -18,6 +18,7 @@ class LoginController extends Controller
         $credentials = $request->only('email','password');
 
         $credentials['password'] = sha1($credentials['password']);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $userService->saveLogin($request);
