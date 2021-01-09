@@ -15,3 +15,7 @@ npm-debug.log
 yarn-error.log
 *.iml
 /.idea
+
+/public/css
+/public/js
+/public/mix-manifest.json

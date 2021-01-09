@@ -46,7 +46,7 @@ Route::get('/register', function () {
 //    return view('passwordReset');
 //});
 
-Route::post('login', LoginController::class);
+Route::post('login', LoginController::class)->middleware(['throttle:login']);
 
 Route::post('register', RegistrationController::class);
 
