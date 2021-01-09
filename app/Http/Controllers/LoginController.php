@@ -23,7 +23,7 @@ class LoginController extends Controller
             $userService->saveLogin($request);
             return redirect()->intended('dashboard');
         }
-//
+
         return back()->withErrors([
             'message' => 'Nieprawidłowe dane logowania',
         ]);
