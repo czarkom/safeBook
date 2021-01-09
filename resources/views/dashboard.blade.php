@@ -47,7 +47,7 @@
                         Dodaj nową notatkę
                     </div>
                     <div class="border-l border-r bg-white px-4 py-2">
-                        <label class="label" for="content">Treść</label>
+                        <label class="label font-semibold" for="content">Treść</label>
                         <input id="content"
                                class="input h-10"
                                type="text"
@@ -56,7 +56,7 @@
                         >
                         <div>
                             <div class="flex mt-4">
-                                <label class="label" for="is_encrypted">Wiadomość szyfrowana</label>
+                                <label class="label font-semibold" for="is_encrypted">Wiadomość szyfrowana</label>
                                 <input
                                     type="checkbox"
                                     class="mx-2"
@@ -65,7 +65,7 @@
                                     onclick="showPasswordInput()">
                             </div>
                             <div id="secret_input" style="display: none">
-                                <label class="label mt-2" for="password">Wprowadź hasło jeśli wiadomość ma być zabezpieczona</label>
+                                <label class="label mt-2 font-semibold" for="password">Wprowadź hasło jeśli wiadomość ma być zabezpieczona</label>
                                 <input id="password"
                                        class="input"
                                        type="password"
@@ -76,14 +76,14 @@
                         </div>
                         <div id="cannot_be_encrypted" class="mt-4">
                             <div class="mb-2 flex label">
-                                <span>Dodaj plik</span>
+                                <span class="font-semibold">Dodaj plik</span>
                                 <div class="ml-2">
                                     <i class="fas fa-folder-plus"></i> :
                                 </div>
                             </div>
                             <input type="file" class="label" name="file">
                             <div class="flex mt-4">
-                                <label class="label" for="is_encrypted">Wiadomość publiczna</label>
+                                <label class="label font-semibold" for="is_encrypted">Wiadomość publiczna</label>
                                 <input
                                     type="checkbox"
                                     class="mx-2"
@@ -92,7 +92,7 @@
                                     onclick="showUserSelect()">
                             </div>
                             <div class="my-2 border-2 rounded p-2 bg-gray-100" id="user_select_box">
-                                <div class="mb-2">
+                                <div class="mb-2 font-semibold">
                                     Udostępnij notatkę innym użytkownikom
                                 </div>
                                 <select class="w-full rounded-lg" multiple name="user[]" id="user_select">
@@ -123,7 +123,7 @@
                         @endif
                         @foreach ($shared as $message)
                             <div class="my-2 border-2 rounded-lg bg-gray-100">
-                                <div class="bg-gray-200 w-full p-2 font-bold">
+                                <div class="bg-gray-200 w-full p-2 font-semibold">
                                     {{$message->author->first_name}} {{$message->author->last_name}} ({{$message->author->email}})
                                 </div>
                                 <div class="p-2 break-words">
@@ -145,15 +145,16 @@
                         @endif
                         @foreach ($sent as $message)
                             <div class="my-2 border-2 rounded-lg bg-gray-100">
-                                <div class="bg-gray-200 w-full p-2 font-bold">
+                                <div class="bg-gray-200 w-full p-2 font-semibold flex justify-between">
                                     {{$message->created_at}}
+                                    @if($message->is_public) <span>Publiczna</span> @endif
                                 </div>
                                 <div class="p-2 break-words">
                                     {{$message->content}}
                                 </div>
                                 @if($message['file'])
                                     <div class="px-2 pb-2">
-                                        <strong>Plik: </strong><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                        <span class="font-semibold">Plik: </span><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
                                     </div>
                                 @endif
                                 @if($message['decrypted'])
@@ -165,7 +166,7 @@
                                     <div class="bg-gray-200 w-full p-2">
                                         <form action="/decryptMessage" method="POST">
                                             @csrf
-                                            <span>Wiadomość zaszyfrowana, wpisz hasło:</span>
+                                            <span class="font-semibold">Wiadomość zaszyfrowana, wpisz hasło:</span>
                                             <div class="flex items-center mt-2">
                                                 <input id="content"
                                                        class="input h-10 mr-2 w-1/2"
@@ -202,7 +203,7 @@
                 @endif
                 @foreach ($publicMessages as $message)
                     <div class="my-2 border-2 rounded-lg bg-gray-100">
-                        <div class="bg-gray-200 w-full p-2 font-bold">
+                        <div class="bg-gray-200 w-full p-2 font-semibold">
                             {{$message->author->first_name}} {{$message->author->last_name}} ({{$message->author->email}})
                         </div>
                         <div class="p-2 break-words">
@@ -210,7 +211,7 @@
                         </div>
                         @if($message['file'])
                             <div class="px-2 pb-2">
-                                <strong>Plik: </strong><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                <span class="font-semibold">Plik: </span><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
                             </div>
                         @endif
                     </div>
