@@ -5,7 +5,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\MessageController;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,11 +43,11 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('/resetPassword', function () {
-    return view('passwordReset');
-});
+//Route::get('/resetPassword', function () {
+//    return view('passwordReset');
+//});
 
-Route::post('login', LoginController::class);
+Route::post('login', LoginController::class)->middleware(['throttle:login']);
 
 Route::post('register', RegistrationController::class);
 
@@ -51,9 +57,62 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('sendMessage', [MessageController::class, 'sendMessage']);
 
     Route::post('decryptMessage', [MessageController::class, 'decryptMessage']);
-//    Route::get('decryptMessage', SendMessageController::class);
 });
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) use ($request) {
+            $user->fill([
+                'password' => $password,
+            ])->save();
+
+            $user->setRememberToken(Str::random(60));
+
+            event(new PasswordReset($user));
+        }
+    );
+
+    return $status == Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->middleware('guest')->name('password.update');
 
 $ignorePrefixes = [
     'api',

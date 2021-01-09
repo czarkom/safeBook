@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="flex justify-center">
-    <div class="w-1/4 mt-16">
+    <div class="w-1/3 mt-16">
         <div class="rounded-xl border-8">
             <img src="/images/safeBook_logo.jpg">
         </div>
@@ -52,7 +52,8 @@
                         <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
+                <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end items-center">
+                    <a href="/forgot-password" class="text-blue-500 hover:underline mr-2">Zapomniałeś hasła?</a>
                     <button type="submit" class="button button-primary">Zaloguj</button>
                     <div class="button button-primary bg-blue-800">
                         <a href="{{ url('/register') }}">Zarejestruj się</a>

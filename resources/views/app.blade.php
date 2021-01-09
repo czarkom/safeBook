@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <title>SafeBook</title>
+    <title>Safebook</title>
 </head>
 <body class="antialiased bg-gray-100">
     @yield('content')

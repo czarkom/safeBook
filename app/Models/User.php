@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Client;
+use App\Notifications\ResetPasswordNotification;
 use App\Permission;
 use App\Role;
 use Carbon\Carbon;
@@ -21,7 +22,7 @@ use Illuminate\Support\Collection;
  * @property string            password
  * @property Carbon            password_changed_at
  */
-class User extends Authenticatable implements CanResetPassword
+class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -65,6 +66,13 @@ class User extends Authenticatable implements CanResetPassword
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt(sha1($password));
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = config('app.url').'/reset-password/'.$token;
+
+        $this->notify(new ResetPasswordNotification($url));
     }
 
 }

@@ -13,15 +13,18 @@ class LoginController extends Controller
 {
     public function __invoke(LoginRequest $request, UserService $userService)
     {
+        sleep(2);
+
         $credentials = $request->only('email','password');
 
         $credentials['password'] = sha1($credentials['password']);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $userService->saveLogin($request);
             return redirect()->intended('dashboard');
         }
-//
+
         return back()->withErrors([
             'message' => 'Nieprawidłowe dane logowania',
         ]);

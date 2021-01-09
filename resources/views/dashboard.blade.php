@@ -35,9 +35,9 @@
                     @endforeach
                 </div>
                 <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
-                    <div class="button button-primary">
-                        <a href="{{ url('/resetPassword') }}">Resetuj hasło</a>
-                    </div>
+{{--                    <div class="button button-primary">--}}
+{{--                        <a href="{{ url('/resetPassword') }}">Resetuj hasło</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <div class="py-2 px-2">
@@ -97,7 +97,7 @@
                     <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                         Udostępnione dla mnie
                     </div>
-                    <div class="border-l border-r bg-white p-4">
+                    <div class="border-l border-r bg-white p-4 rounded-b">
                         <div>
                             Wiadomosc 1
                         </div>
@@ -110,7 +110,7 @@
                     <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                         Moje notatki
                     </div>
-                    <div class="border-l border-r bg-white px-4 py-2">
+                    <div class="border-l border-r bg-white px-4 py-2 rounded-b">
                         @if(count($sent)==0)
                             <div class="font-gray-800">
                                 Brak notatek
@@ -162,7 +162,7 @@
             <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                 Notatki publiczne
             </div>
-            <div class="border-l border-r bg-white px-4 py-2">
+            <div class="border-l border-r bg-white px-4 py-2 rounded-b">
                 @if(count($publicMessages)==0)
                     <div class="font-gray-800">
                         Brak wiadomości
