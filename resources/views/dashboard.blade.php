@@ -98,12 +98,21 @@
                         Udostępnione dla mnie
                     </div>
                     <div class="border-l border-r bg-white p-4 rounded-b">
-                        <div>
-                            Wiadomosc 1
-                        </div>
-                        <div>
-                            Wiadomosc 2
-                        </div>
+                        @if(count($shared)==0)
+                            <div class="font-gray-800">
+                                Brak wiadomości
+                            </div>
+                        @endif
+                        @foreach ($shared as $message)
+                            <div class="my-2 border-2 rounded-lg bg-gray-100">
+                                <div class="bg-gray-200 w-full p-2 font-bold">
+                                    {{$message->author->first_name}} {{$message->author->last_name}} ({{$message->author->email}})
+                                </div>
+                                <div class="p-2 break-words">
+                                    {{$message->content}}
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="py-2 px-2">
@@ -171,7 +180,7 @@
                 @foreach ($publicMessages as $message)
                     <div class="my-2 border-2 rounded-lg bg-gray-100">
                         <div class="bg-gray-200 w-full p-2 font-bold">
-                            {{$message->user->first_name}} {{$message->user->last_name}} ({{$message->user->email}})
+                            {{$message->author->first_name}} {{$message->author->last_name}} ({{$message->author->email}})
                         </div>
                         <div class="p-2 break-words">
                             {{$message->content}}

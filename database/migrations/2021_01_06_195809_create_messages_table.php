@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->bigInteger('author_id');
             $table->string('content')->nullable();
             $table->boolean('is_encrypted')->default(false);
             $table->string('password')->nullable();

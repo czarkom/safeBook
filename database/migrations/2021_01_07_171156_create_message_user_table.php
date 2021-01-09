@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSharedMessagesTable extends Migration
+class CreateMessageUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSharedMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shared_messages', function (Blueprint $table) {
+        Schema::create('message_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('message_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
 
             $table->unique(['user_id', 'message_id']);

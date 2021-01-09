@@ -15,11 +15,11 @@ class MessageService
     protected $cipher = 'aes-256-cbc-hmac-sha256';
 
     public function getPublicMessages(){
-        return Message::with('user')->where('is_public', true)->get();
+        return Message::with('author')->where('is_public', true)->get();
     }
 
     public function getUserSentMessages(User $user, $withDecrypted, Request $request){
-        $messages = $user->messages()->get();
+        $messages = $user->sentMessages()->get();
         if(!$withDecrypted){
             return $messages;
         }
@@ -33,7 +33,7 @@ class MessageService
             return $messages;
         }
         $message_decrypted = openssl_decrypt($encryptedMessage['content'], $this->cipher, $request['message_password'], 0, 'safetyisreallyok');
-        $messages = $user->messages()->get();
+
         foreach ($messages as $key => $message){
             if($message['id'] == $encryptedMessage['id']){
                 $messages[$key]['content'] = $message_decrypted;
@@ -45,15 +45,27 @@ class MessageService
     }
 
     public function saveMessage(MessageRequest $message){
-        $user = $message->user();
 
-        $user->messages()->create($message->only([
+        $user = $message->user();
+        $message['author_id'] = $user->id;
+
+        $newMessage = $user->messages()->create($message->only([
             'content',
+            'author_id',
         ]));
+
+//        foreach ($message['user'] as $sharedUserId){
+//            $user = User::find($sharedUserId);
+//            $user->messages()->create($message->only([
+//               'content',
+//               'author_id',
+//            ]));
+//        }
+        $newMessage->users()->sync($message['user']);
     }
 
     public function getSharedMessages(User $user){
-        return 'dupa';
+        return $user->messages()->where('author_id','<>', $user->id)->get();
     }
 
     public function saveEncryptedMessage(MessageRequest $request){

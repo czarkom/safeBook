@@ -21,6 +21,7 @@ use Illuminate\Support\Collection;
  * @property string            email
  * @property string            password
  * @property Carbon            password_changed_at
+ * @method static find($sharedUserId)
  */
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -56,8 +57,12 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function sentMessages(){
+        return $this->hasMany(Message::class, 'author_id');
+    }
+
     public function messages(){
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(Message::class);
     }
 
     public function lastLogins(){

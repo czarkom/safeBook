@@ -11,14 +11,20 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
+        'author_id',
         'content',
         'file',
         'is_encrypted',
         'password'
         ];
 
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(\App\Models\User::class);
     }
 }
