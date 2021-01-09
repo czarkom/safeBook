@@ -54,35 +54,53 @@
                                placeholder="Lorem ipsum gipsum"
                                name="content"
                         >
-                        <div class="my-2 border-2 rounded p-2 bg-gray-100">
-                            <div class="mb-2">
-                                Wybierz użytkowników
-                            </div>
-                            <select class="w-full rounded-lg" multiple name="user[]">
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->email}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-2 flex label">
-                            <span>Dodaj plik</span>
-                            <div class="ml-2">
-                                <i class="fas fa-folder-plus"></i> :
-                            </div>
-                        </div>
-                        <input type="file" class="label" name="file">
                         <div>
                             <div class="flex mt-4">
                                 <label class="label" for="is_encrypted">Wiadomość szyfrowana</label>
-                                <input type="checkbox" class="mx-2" id="is_encrypted" name="is_encrypted">
+                                <input
+                                    type="checkbox"
+                                    class="mx-2"
+                                    id="is_encrypted"
+                                    name="is_encrypted"
+                                    onclick="showPasswordInput()">
                             </div>
-                            <label class="label mt-2" for="password">Wprowadź hasło jeśli wiadomość ma być zabezpieczona</label>
-                            <input id="password"
-                                   class="input"
-                                   type="password"
-                                   placeholder="********"
-                                   name="password"
-                            >
+                            <div id="secret_input" style="display: none">
+                                <label class="label mt-2" for="password">Wprowadź hasło jeśli wiadomość ma być zabezpieczona</label>
+                                <input id="password"
+                                       class="input"
+                                       type="password"
+                                       placeholder="********"
+                                       name="password"
+                                >
+                            </div>
+                        </div>
+                        <div id="cannot_be_encrypted" class="mt-4">
+                            <div class="mb-2 flex label">
+                                <span>Dodaj plik</span>
+                                <div class="ml-2">
+                                    <i class="fas fa-folder-plus"></i> :
+                                </div>
+                            </div>
+                            <input type="file" class="label" name="file">
+                            <div class="flex mt-4">
+                                <label class="label" for="is_encrypted">Wiadomość publiczna</label>
+                                <input
+                                    type="checkbox"
+                                    class="mx-2"
+                                    id="is_public"
+                                    name="is_public"
+                                    onclick="showUserSelect()">
+                            </div>
+                            <div class="my-2 border-2 rounded p-2 bg-gray-100" id="user_select_box">
+                                <div class="mb-2">
+                                    Udostępnij notatkę innym użytkownikom
+                                </div>
+                                <select class="w-full rounded-lg" multiple name="user[]" id="user_select">
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->email}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
@@ -121,7 +139,7 @@
                     </div>
                     <div class="border-l border-r bg-white px-4 py-2 rounded-b">
                         @if(count($sent)==0)
-                            <div class="font-gray-800">
+                            <div class="font-gray-800 py-2">
                                 Brak notatek
                             </div>
                         @endif
@@ -174,7 +192,7 @@
             <div class="border-l border-r bg-white px-4 py-2 rounded-b">
                 @if(count($publicMessages)==0)
                     <div class="font-gray-800">
-                        Brak wiadomości
+                        Brak notatek
                     </div>
                 @endif
                 @foreach ($publicMessages as $message)
@@ -191,6 +209,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showPasswordInput(){
+        var x = document.getElementById("secret_input");
+        var y = document.getElementById("cannot_be_encrypted")
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+            y.style.display = 'none';
+        } else {
+            x.style.display = "none";
+            y.style.display = "block";
+        }
+    }
+    function showUserSelect(){
+        var x = document.getElementById("user_select_box");
+        var y = document.getElementById("user_select");
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = "none";
+            y.value = "";
+        }
+    }
+</script>
 @endsection
 
 
