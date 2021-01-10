@@ -18,7 +18,7 @@
                             <span>Popraw błędy w formularzu</span>
                         </div>
                     @endif
-                    <label class="label" for="name">Imię</label>
+                    <label class="label font-semibold" for="name">Imię</label>
                     <input id="name"
                            class="input"
                            type="text"
@@ -28,7 +28,7 @@
                     @error('first_name')
                         <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
                     @enderror
-                    <label class="label mt-4" for="surname">Nazwisko</label>
+                    <label class="label mt-4 font-semibold" for="surname">Nazwisko</label>
                     <input id="surname"
                            class="input"
                            type="text"
@@ -37,7 +37,7 @@
                     @error('last_name')
                         <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
                     @enderror
-                    <label class="label mt-4" for="email">Adres e-mail</label>
+                    <label class="label mt-4 font-semibold" for="email">Adres e-mail</label>
                     <input id="email"
                            class="input"
                            type="text"
@@ -47,7 +47,12 @@
                     @error('email')
                         <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
                     @enderror
-                    <label class="label mt-4" for="password">Hasło</label>
+                    <label class="label mt-4" for="password">
+                        <span class="font-semibold">
+                            Hasło
+                        </span>
+                        (musi zawierać co najmniej 1 dużą, 1 małą literę, 1 cyfrę oraz 1 znak specjalny (!$#%@&^))
+                    </label>
                     <input id="password"
                            class="input"
                            type="password"
@@ -57,7 +62,7 @@
                     @error('password')
                         <div class="mt-1 text-red-500 font-medium mt-1 text-sm">{{ $message }}</div>
                     @enderror
-                    <label class="label mt-4" for="password_repeat">Powtórz hasło</label>
+                    <label class="label mt-4 font-semibold" for="password_repeat">Powtórz hasło</label>
                     <input id="password_repeat"
                            class="input"
                            type="password"
