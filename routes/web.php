@@ -23,18 +23,6 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::group(['middleware' => ['web']], function () {
-//    Route::get('/dashboard', function () {
-//        return view('dashboard');
-//    })->middleware('auth');
-//});
-
-//Route::get('/dashboard', function () {
-//    Route::get('dashboard', \App\Http\Controllers\DashboardController::class);
-//})->middleware('auth');
-
-//    ->middleware('auth');
-
 Route::get('/login', function() {
     return view('login');
 })->name('login');
@@ -42,10 +30,6 @@ Route::get('/login', function() {
 Route::get('/register', function () {
     return view('register');
 });
-
-//Route::get('/resetPassword', function () {
-//    return view('passwordReset');
-//});
 
 Route::post('login', LoginController::class)->middleware(['throttle:login']);
 
@@ -55,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('logout', LogoutController::class);
     Route::get('dashboard', DashboardController::class);
     Route::post('sendMessage', [MessageController::class, 'sendMessage']);
+    Route::get('download-file/{id}', [MessageController::class, 'downloadFile']);
 
     Route::post('decryptMessage', [MessageController::class, 'decryptMessage']);
 });

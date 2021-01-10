@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
+use App\Models\Message;
 use App\Models\User;
 use App\Services\MessageService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
 {
@@ -35,5 +37,10 @@ class MessageController extends Controller
             'lastLogins' => $lastLogins,
             'users' => $users,
         ]);
+    }
+
+    public function downloadFile($id, Request $request){
+        $filename = Message::find($id)->file;
+        return Storage::download('images/dieta.txt');
     }
 }

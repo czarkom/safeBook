@@ -51,9 +51,10 @@ class MessageService
         if ($message['is_public']){
             $message['is_public'] = 1;
         }
+
         if($message['file']){
-            $file = Storage::disk('local')->put('files_uploaded', $message['file']);
-            $message['file'] = $file;
+            Storage::disk('local')->put('files_uploaded', $message['file']);
+//            $message['file'] = $message['file']->getClientOriginalName();
         }
 
         $newMessage = $user->messages()->create($message->only([
@@ -84,6 +85,6 @@ class MessageService
         $message['content'] = openssl_encrypt($message['content'], $this->cipher, $message['password'], 0, "safetyisreallyok");
         $message['password'] = bcrypt($message['password']);
         $message['is_encrypted'] = 1;
-        $user->messages()->create($message);
+        $user->sentMessages()->create($message);
     }
 }

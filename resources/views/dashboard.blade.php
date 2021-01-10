@@ -27,17 +27,12 @@
                 <div class="rounded-t border bg-gray-200 px-4 py-3 font-bold">
                     Ostatnie logowania
                 </div>
-                <div class="border-l border-r bg-white p-4">
+                <div class="border-l border-r bg-white p-4 rounded-b">
                     @foreach($lastLogins as $attempt)
                         <div class="my-2">
                             <strong>Adres IP: </strong>{{$attempt->ip_address}} <strong>Data: </strong>{{$attempt->created_at}}
                         </div>
                     @endforeach
-                </div>
-                <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
-{{--                    <div class="button button-primary">--}}
-{{--                        <a href="{{ url('/resetPassword') }}">Resetuj hasło</a>--}}
-{{--                    </div>--}}
                 </div>
             </div>
             <div class="py-2 px-2">
@@ -129,6 +124,11 @@
                                 <div class="p-2 break-words">
                                     {{$message->content}}
                                 </div>
+                                @if($message['file'])
+                                    <div class="px-2 pb-2">
+                                        <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -154,7 +154,7 @@
                                 </div>
                                 @if($message['file'])
                                     <div class="px-2 pb-2">
-                                        <span class="font-semibold">Plik: </span><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                        <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
                                     </div>
                                 @endif
                                 @if($message['decrypted'])
@@ -211,7 +211,7 @@
                         </div>
                         @if($message['file'])
                             <div class="px-2 pb-2">
-                                <span class="font-semibold">Plik: </span><a href="/download-file" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
                             </div>
                         @endif
                     </div>
