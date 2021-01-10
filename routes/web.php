@@ -24,7 +24,6 @@ use Illuminate\Support\Str;
 |
 */
 
-//\Illuminate\Support\Facades\Auth::routes(['verify' => true]);
 Route::get('/login', function() {
     return view('login');
 })->name('login');
@@ -37,8 +36,8 @@ Route::post('login', LoginController::class)->middleware(['throttle:login']);
 
 Route::post('register', RegistrationController::class);
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('logout', LogoutController::class);
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::post('logout', LogoutController::class)->name('logout');
     Route::get('dashboard', DashboardController::class);
     Route::post('sendMessage', [MessageController::class, 'sendMessage']);
     Route::get('download-file/{id}', [MessageController::class, 'downloadFile']);
@@ -52,8 +51,7 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
-    return redirect('/home');
+    return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::get('/forgot-password', function () {
