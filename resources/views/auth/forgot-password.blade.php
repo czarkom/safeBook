@@ -27,8 +27,11 @@
                         >
                     </div>
                     <div class="rounded-b border bg-gray-200 px-4 py-2 text-right flex justify-end">
+                        <div class="button button-primary bg-blue-800 mr-2">
+                            <a href="{{ url('/login') }}">Powrót do strony logowania</a>
+                        </div>
                         <button type="submit" class="button button-primary">
-                            Resetuj hasło
+                            Wyślij link resetujący
                             <i class="fas fa-trash-restore-alt ml-2"></i>
                         </button>
                     </div>

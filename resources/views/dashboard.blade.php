@@ -76,7 +76,7 @@
                                     <i class="fas fa-folder-plus"></i> :
                                 </div>
                             </div>
-                            <input type="file" class="label" name="file">
+                            <input type="file" class="label" name="file_upload">
                             <div class="flex mt-4">
                                 <label class="label font-semibold" for="is_encrypted">Wiadomość publiczna</label>
                                 <input
@@ -152,9 +152,9 @@
                                 <div class="p-2 break-words">
                                     {{$message->content}}
                                 </div>
-                                @if($message['file'])
+                                @if($message['filename'])
                                     <div class="px-2 pb-2">
-                                        <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                        <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->filename}}</a>
                                     </div>
                                 @endif
                                 @if($message['decrypted'])
@@ -209,9 +209,9 @@
                         <div class="p-2 break-words">
                             {{$message->content}}
                         </div>
-                        @if($message['file'])
+                        @if($message['filename'])
                             <div class="px-2 pb-2">
-                                <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->file}}</a>
+                                <span class="font-semibold">Plik: </span><a href="/download-file/{{$message->id}}" class="text-blue-500 hover:underline mr-2">{{$message->filename}}</a>
                             </div>
                         @endif
                     </div>

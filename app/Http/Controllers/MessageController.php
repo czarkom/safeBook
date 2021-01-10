@@ -40,7 +40,6 @@ class MessageController extends Controller
     }
 
     public function downloadFile($id, Request $request){
-        $filename = Message::find($id)->file;
-        return Storage::download('images/dieta.txt');
+        return Storage::download('files_uploaded/'.Message::find($id)->file_hash, Message::find($id)->filename);
     }
 }

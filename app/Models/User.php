@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Client;
 use App\Notifications\ResetPasswordNotification;
-use App\Permission;
-use App\Role;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
