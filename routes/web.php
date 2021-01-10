@@ -23,6 +23,8 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//\Illuminate\Support\Facades\Auth::routes(['verify' => true]);
 Route::get('/login', function() {
     return view('login');
 })->name('login');
@@ -45,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/email/verify', function () {
-    return view('auth.verify-email');
+    return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
