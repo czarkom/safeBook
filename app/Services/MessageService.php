@@ -56,7 +56,6 @@ class MessageService
             Storage::disk('local')->put('files_uploaded', $message['file_upload']);
             $message['file_hash'] = $message->file_upload->hashName();
             $message['filename'] = $message->file_upload->getClientOriginalName();
-            dump($message['file']);
         }
 
         $newMessage = $user->messages()->create($message->only([

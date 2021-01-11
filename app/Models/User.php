@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\ResetPasswordNotification;
+use App\Notifications\VerifyEmail;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -60,7 +61,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
     public function messages(){
-        return $this->belongsToMany(Message::class);
+        return $this->belongsToMany(Message::class)->withTimestamps();
     }
 
     public function lastLogins(){
@@ -77,5 +78,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
         $this->notify(new ResetPasswordNotification($url));
     }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
+    }
+
 
 }
