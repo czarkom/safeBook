@@ -3,7 +3,6 @@
 
 namespace App\Services;
 
-
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
 use App\Models\User;
@@ -52,16 +51,19 @@ class MessageService
             $message['is_public'] = 1;
         }
 
-        if($message['file']){
-            Storage::disk('local')->put('files_uploaded', $message['file']);
-//            $message['file'] = $message['file']->getClientOriginalName();
+        if($message['file_upload']){
+
+            Storage::disk('local')->put('files_uploaded', $message['file_upload']);
+            $message['file_hash'] = $message->file_upload->hashName();
+            $message['filename'] = $message->file_upload->getClientOriginalName();
         }
 
         $newMessage = $user->messages()->create($message->only([
             'content',
             'author_id',
-            'file',
-            'is_public'
+            'is_public',
+            'filename',
+            'file_hash'
         ]));
         $newMessage->users()->sync($message['user']);
     }

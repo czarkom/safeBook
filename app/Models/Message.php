@@ -16,7 +16,8 @@ class Message extends Model
     protected $fillable = [
         'author_id',
         'content',
-        'file',
+        'filename',
+        'file_hash',
         'is_encrypted',
         'password',
         'is_public'

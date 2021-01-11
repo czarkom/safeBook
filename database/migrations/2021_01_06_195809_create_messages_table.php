@@ -19,7 +19,8 @@ class CreateMessagesTable extends Migration
             $table->string('content')->nullable();
             $table->boolean('is_encrypted')->default(false);
             $table->string('password')->nullable();
-            $table->string('file')->nullable();
+            $table->string('filename')->nullable();
+            $table->string('file_hash')->nullable();
             $table->boolean('is_public')->default(false);
             $table->timestamps();
         });

@@ -43,6 +43,7 @@ class ResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Safebook | Resetowanie hasła')
                     ->greeting('Witaj!')
                     ->line('W aplikacji Safebook wygenerowana została prośba o zresetowanie'.
                         ' hasła przypisanego do tego maila. Kliknij w poniższy przycisk, aby przejść '.

@@ -18,8 +18,8 @@ class RegistrationController extends Controller
             'password',
         ]));
 
-//        $user->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
-        return redirect('/login')->with('status', 'Zarejestrowano pomyślnie! Zaloguj się');
+        return redirect('/login')->with('status', 'Zarejestrowano pomyślnie! Zaloguj się.');
     }
 }
