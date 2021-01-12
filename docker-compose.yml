@@ -17,30 +17,30 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: 20052808/safebook:release
+    image: 20052808/safebook
     networks:
       - appnet
 
   mysql:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: ochrona
-      MYSQL_DATABASE: safebook
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
-#    expose:
-#      - "3306"
-    ports:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    expose:
       - "3306"
+    ports:
+      - "3306:3306"
 #    volumes:
 #      - ./dbdata:/var/lib/mysql
-##      - ./mysql/my.cnf:/etc/mysql/my.cnf
+#      - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - appnet
 
 networks:
   appnet:
-    driver: "bridge"
+    driver: bridge
 #volumes:
 #  dbdata:
 #    driver: "local"

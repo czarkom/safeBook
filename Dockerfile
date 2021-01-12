@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install pdo_mysql zip exif pcntl
+RUN docker-php-ext-install pdo_mysql zip exif bcmath pcntl
 
 #RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash && . /root/.nvm/nvm.sh && nvm install node
 
@@ -30,16 +30,23 @@ RUN wget https://nodejs.org/dist/v15.5.1/node-v15.5.1-linux-x64.tar.xz && tar xf
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+# RUN groupadd -g 1000 www
+# RUN useradd -u 1000 -ms /bin/bash -g www-data www-data
 
 RUN node -v && sleep 10
 
 COPY . /var/www
+
+WORKDIR /var/www
 RUN composer install && npm run prod
-COPY --chown=www:www . /var/www
-USER www
+RUN pwd && sleep 20
+RUN cat .env && sleep 20
+COPY --chown=www-data:www-data . /var/www
+
+# RUN chown -R www-data:www-data /var/www
+USER www-data
 
 EXPOSE 9000
 CMD ["php-fpm"]
-CMD  php artisan migrate
+
+CMD php artisan migrate
