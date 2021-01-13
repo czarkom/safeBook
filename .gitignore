@@ -6,7 +6,7 @@
 /storage/framework/sessions
 /resources/sass
 /vendor
-.env
+.test_env_docker
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml

@@ -39,14 +39,19 @@ COPY . /var/www
 
 WORKDIR /var/www
 RUN composer install && npm run prod
-RUN pwd && sleep 20
-RUN cat .env && sleep 20
+
 COPY --chown=www-data:www-data . /var/www
 
-# RUN chown -R www-data:www-data /var/www
+COPY .test_env_docker /var/www/.env
+
+RUN chown -R www-data:www-data /var/www/bootstrap /var/www/storage
 USER www-data
 
 EXPOSE 9000
-CMD ["php-fpm"]
 
 CMD php artisan migrate
+CMD php artisan route:clear
+CMD php artisan config:clear
+CMD php artisan cache:clear
+
+CMD ["php-fpm"]
